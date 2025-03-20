@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Секретное послание</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #ff758c, #ff7eb3);
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Анимированные мерцающие звезды */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: url('https://i.imgur.com/HG1uD58.png') repeat;
+            animation: twinkling 5s infinite alternate;
+        }
+
+        @keyframes twinkling {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+        h2 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        .input-container {
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards 0.5s;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            width: 250px;
+            text-align: center;
+            outline: none;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 12px 24px;
+            font-size: 20px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #ff4e91, #ff2e6a);
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: glow 1.5s infinite alternate;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+            to { box-shadow: 0 0 20px rgba(255, 255, 255, 1); }
+        }
+
+        .error {
+            color: #ff0000;
+            font-size: 16px;
+            margin-top: 10px;
+            display: none;
+            animation: blink 1s infinite;
+        }
+
+        #message {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+            animation: fadeIn 2s forwards, floatUp 2s ease-out;
+            position: relative;
+        }
+
+        /* Сердца, поднимающиеся вверх */
+        .heart {
+            position: absolute;
+            color: #ff4e91;
+            font-size: 24px;
+            animation: floatHeart 4s linear infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes floatUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Фон со звёздами -->
+    <div class="stars"></div>
+    <h2>Введите пароль, чтобы увидеть секретное сообщение</h2>
+    
+    <div class="input-container">
+        <input type="password" id="password" placeholder="Введите пароль">
+    </div>
+    
+    <button onclick="checkPassword()">Проверить</button>
+    
+    <p id="error" class="error">Неверный пароль!</p>
+    
+    <div id="message">💖Ты — моё вдохновение, мой свет и мой самый нежный сон. Каждое мгновение рядом с тобой наполнено теплом, радостью и бесконечной благодарностью за то, что ты есть.
+
+Твой голос — самая прекрасная музыка, твой смех — мелодия счастья, а твои глаза — бездонное небо, в котором я нахожу покой. С тобой я хочу делить каждый рассвет, каждую звезду, каждый вздох.✨</div>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById("password").value;
+            var message = document.getElementById("message");
+            var error = document.getElementById("error");
+
+            if (password === "23.11.
+                2012") { // Замени на свой пароль
+                message.style.display = "inline-block";
+                error.style.display = "none";
+                createHearts();
+            } else {
+                message.style.display = "none";
+                error.style.display = "block";
+            }
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.top = Math.random() * window.innerHeight + "px";
+                heart.style.animationDuration = (Math.random() * 2 + 2) + "s";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }
+        }
+    </script>
+
+</body>
+</html>
